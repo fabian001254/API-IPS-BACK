@@ -1,4 +1,4 @@
-import App from "./src/Router"
+import App from "./src/App"
 
-const app = new App();
-app.start();
+const app = new App()
+app.start()

@@ -7,9 +7,9 @@ export const swaggerOptions={
     definition:{
         openapi:"3.0.0",
         info:{
-            title:"IPS AteneaIPS",
+            title:"IPS APISAS",
             version:"1.0.0",
-            description:"En esta API tenemos la funcionalidad que soporta la operación de la IPS AteneaIPS"
+            description:"En esta API tenemos la funcionalidad que soporta la operación de la IPS APISAS"
         },
         servers:[
             {

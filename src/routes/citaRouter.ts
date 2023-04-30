@@ -12,6 +12,8 @@ class citaRouter extends routerClass{
         // Define las rutas para los endpoints GET y POST
         this.routes()
     }
+
+    
     public routes():void{
 
         // Endpoint GET para crear una cita

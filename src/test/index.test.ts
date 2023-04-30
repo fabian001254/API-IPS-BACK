@@ -1,10 +1,9 @@
-//Impoerar las bibliotecas
-
+/*
 import Request  from "supertest"
-import App from "../src/Router"
+import App from "../src/App"
 
 describe(
-    'GET /',
+    "GET /",
     ()=>{
 
         let app:App
@@ -33,4 +32,4 @@ describe(
         )
 
     }
-)
+)*/

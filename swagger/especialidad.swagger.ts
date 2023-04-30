@@ -1,17 +1,15 @@
 export default {
     /**
-     * 
      * @swagger
-     * 
      * tags:
-     *   name: Paciente
-     *   description: Endpoints para operaciones relacionadas con Paciente.
+     *   name: Especialidad
+     *   description: Endpoints para operaciones relacionadas con especialidades.
      * 
-     * /Paciente:
+     * /Especialidad:
      *   get:
      *     tags:
-     *     - Paciente
-     *     summary: Obtiene la lista de todos los pacientes registrados.
+     *     - Especialidad
+     *     summary: Obtiene la lista de todas las especialidades registradas.
      *     responses:
      *       '200':
      *         description: OK
@@ -20,28 +18,22 @@ export default {
      *             schema:
      *               type: object
      *               properties:
-     *                 pacientes:
+     *                 especialidades:
      *                   type: array
      *                   items:
      *                     type: object
      *                     properties:
-     *                       cedula:
-     *                         type: string
+     *                       id:
+     *                         type: integer
      *                       nombre:
-     *                         type: string
-     *                       apellido:
-     *                         type: string
-     *                       fechaNacimiento:
-     *                         type: string
-     *                         format: date
-     *                       telefono:
      *                         type: string
      *       '500':
      *         description: Error del servidor
+     * 
      *   post:
      *     tags:
-     *     - Paciente
-     *     summary: Crea un nuevo registro de paciente en la base de datos.
+     *     - Especialidad
+     *     summary: Crea un nuevo registro de especialidad en la base de datos.
      *     requestBody:
      *       required: true
      *       content:
@@ -49,23 +41,10 @@ export default {
      *           schema:
      *             type: object
      *             properties:
-     *               cedula:
-     *                 type: integer
      *               nombre:
      *                 type: string
-     *               apellido:
-     *                 type: string
-     *               fechaNacimiento:
-     *                 type: string
-     *                 format: date
-     *               telefono:
-     *                 type: string
      *             required:
-     *               - cedula
      *               - nombre
-     *               - apellido
-     *               - fechaNacimiento
-     *               - telefono
      *     responses:
      *       '201':
      *         description: Creado con éxito.
@@ -76,19 +55,12 @@ export default {
      *               properties:
      *                 message:
      *                   type: string
-     *                 paciente:
+     *                 especialidad:
      *                   type: object
      *                   properties:
-     *                     cedula:
+     *                     id:
      *                       type: integer
      *                     nombre:
-     *                       type: string
-     *                     apellido:
-     *                       type: string
-     *                     fechaNacimiento:
-     *                       type: string
-     *                       format: date
-     *                     telefono:
      *                       type: string
      *       '400':
      *         description: Bad Request

@@ -8,7 +8,7 @@ import especialidadRoutes from "./routes/especialidadRouter"
 import citaRouter from "./routes/citaRouter"
 /**
  * Clase principal de la api
- *  @author fabian Trujillo
+ *  @author Fabian Trujillo
  *  @description Clase de la api
  */
 	class App{
@@ -30,6 +30,7 @@ import citaRouter from "./routes/citaRouter"
 		this.routes()
 		this.prismaClient = new PrismaClient()
 	}
+
 	/*
 		Definir rutas de express
 	*/
@@ -40,11 +41,16 @@ import citaRouter from "./routes/citaRouter"
 		this.app.use("/", especialidadRoutes)
 		this.app.use("/", citaRouter)
 	}
-
+	/*
+		Metodo que inicia el servidor en el puerto 3000
+	*/
 	public start():void{
 		this.server = this.app.listen(3000,
 			()=>{console.log("Servidor iniciado 3000")})
 	}
+	/*
+		Metodo que apaga el servidor 
+	*/
 	public close():void{
 		this.server.close()
 	}

@@ -74,6 +74,8 @@ class MedicoController extends Controller {
           apellido,
           consultorio,
           correo,
+          /*Conecta la especialidad del médico a crear con la especialidad existente en la base de datos,
+            utilizando el id de la especialidad encontrada en la búsqueda previa.,*/
           Especialidad: { connect: { idEspecialidad: especialidadfind.idEspecialidad } },
         },
       })
