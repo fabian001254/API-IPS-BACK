@@ -6,6 +6,7 @@ import PacienteRouter from "./routes/PacienteRouter"
 import MedicoRouter from "./routes/MedicoRoutes"
 import especialidadRoutes from "./routes/especialidadRouter"
 import citaRouter from "./routes/citaRouter"
+import formularioRouter from "./routes/formularioRouter"
 /**
  * Clase principal de la api
  *  @author Fabian Trujillo
@@ -40,6 +41,7 @@ import citaRouter from "./routes/citaRouter"
 		this.app.use("/", MedicoRouter)
 		this.app.use("/", especialidadRoutes)
 		this.app.use("/", citaRouter)
+		this.app.use("/", formularioRouter)
 	}
 	/*
 		Metodo que inicia el servidor en el puerto 3000
