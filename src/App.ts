@@ -7,6 +7,7 @@ import MedicoRouter from "./routes/MedicoRoutes"
 import especialidadRoutes from "./routes/especialidadRouter"
 import citaRouter from "./routes/citaRouter"
 import formularioRouter from "./routes/formularioRouter"
+import cors from "cors"
 /**
  * Clase principal de la api
  *  @author Fabian Trujillo
@@ -28,6 +29,7 @@ import formularioRouter from "./routes/formularioRouter"
 			SwaggerUi.serve,
 			SwaggerUi.setup(swaggerSpec)
 		)
+		this.app.use(cors())
 		this.routes()
 		this.prismaClient = new PrismaClient()
 	}
