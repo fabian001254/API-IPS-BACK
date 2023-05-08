@@ -16,21 +16,17 @@
      *           schema:
      *             type: object
      *             properties:
-     *               fecha:
-     *                 type: string
-     *                 format: date
-     *               hora:
-     *                 type: string
-     *                 format: time
-     *               medicoId:
-     *                 type: integer
-     *               pacienteId:
-     *                 type: integer
+     *                fecha:
+     *                  type: string
+     *                  format: date
+     *                cedulaPaciente:
+     *                  type: integer
+     *                tarjetaProfesional:
+     *                  type: integer
      *             required:
      *               - fecha
-     *               - hora
-     *               - medicoId
-     *               - pacienteId
+     *               - cedulaPaciente
+     *               - tarjetaProfesional
      *     responses:
      *       '201':
      *         description: Creado con éxito.
@@ -44,18 +40,13 @@
      *                 cita:
      *                   type: object
      *                   properties:
-     *                     id:
-     *                       type: integer
-     *                     fecha:
-     *                       type: string
-     *                       format: date
-     *                     hora:
-     *                       type: string
-     *                       format: time
-     *                     medicoId:
-     *                       type: integer
-     *                     pacienteId:
-     *                       type: integer
+     *                       fecha:
+     *                         type: string
+     *                         format: date
+     *                       cedulaPaciente:
+     *                         type: integer
+     *                       tarjetaProfesional:
+     *                         type: integer
      *       '400':
      *         description: Bad Request
      *         content:
@@ -85,18 +76,20 @@
      *                   items:
      *                     type: object
      *                     properties:
-     *                       id:
-     *                         type: integer
-     *                       fecha:
+     *                       Nombre_Medico:
      *                         type: string
      *                         format: date
-     *                       hora:
+     *                       Apellido_Medico:
      *                         type: string
-     *                         format: time
-     *                       medicoId:
+     *                       Nombre_Paciente:
+     *                         type: string
+     *                       Apellido_Paciente:
+     *                         type: string
+     *                       Cedula_Paciente:
      *                         type: integer
-     *                       pacienteId:
-     *                         type: integer
+     *                       Dia_Cita:
+     *                          type: string
+     *                          format: date
      *       '500':
      *         description: Error del servidor
      */

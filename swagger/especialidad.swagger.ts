@@ -58,7 +58,7 @@ export default {
      *                 especialidad:
      *                   type: object
      *                   properties:
-     *                     id:
+     *                     idEspecialidad:
      *                       type: integer
      *                     nombre:
      *                       type: string

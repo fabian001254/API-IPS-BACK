@@ -1,11 +1,13 @@
 import SwaggerUi from "swagger-ui-express"
 import { swaggerSpec } from "./swagger.conf"
-import express,{ Application, Request, Response } from "express"
+import express,{ Application, NextFunction, Request, Response } from "express"
 import {Prisma, PrismaClient} from "@prisma/client"
 import PacienteRouter from "./routes/PacienteRouter"
 import MedicoRouter from "./routes/MedicoRoutes"
 import especialidadRoutes from "./routes/especialidadRouter"
 import citaRouter from "./routes/citaRouter"
+import formularioRouter from "./routes/formularioRouter"
+import cors from "cors"
 /**
  * Clase principal de la api
  *  @author Fabian Trujillo
@@ -27,6 +29,7 @@ import citaRouter from "./routes/citaRouter"
 			SwaggerUi.serve,
 			SwaggerUi.setup(swaggerSpec)
 		)
+		this.app.use(cors())
 		this.routes()
 		this.prismaClient = new PrismaClient()
 	}
@@ -40,6 +43,13 @@ import citaRouter from "./routes/citaRouter"
 		this.app.use("/", MedicoRouter)
 		this.app.use("/", especialidadRoutes)
 		this.app.use("/", citaRouter)
+		this.app.use("/", formularioRouter)
+		this.app.use(
+			(req:Request,res:Response,next:NextFunction)=>{
+				res.status(404).json({message: "Recurso no encontrado"})
+				next()
+			})
+		
 	}
 	/*
 		Metodo que inicia el servidor en el puerto 3000
@@ -52,7 +62,9 @@ import citaRouter from "./routes/citaRouter"
 		Metodo que apaga el servidor 
 	*/
 	public close():void{
-		this.server.close()
+		if (this.server) {
+            this.server.close()
+        }
 	}
 }
 export default App
