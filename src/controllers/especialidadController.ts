@@ -48,8 +48,8 @@ class EspecialidadController extends Controller{
          */
     async obtenerEspecialidad(req:Request, res:Response){
         try{
-            const especialidad = await this.prismaClient.especialidad.findMany()
-            res.status(200).json(especialidad)
+            const especialidades = await this.prismaClient.especialidad.findMany()
+            res.status(200).json({especialidades})
         }catch(e){
             console.error(e)
             res.status(500).json({ message: "Error en listar la especialidad" })

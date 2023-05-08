@@ -1,6 +1,6 @@
 import SwaggerUi from "swagger-ui-express"
 import { swaggerSpec } from "./swagger.conf"
-import express,{ Application, Request, Response } from "express"
+import express,{ Application, NextFunction, Request, Response } from "express"
 import {Prisma, PrismaClient} from "@prisma/client"
 import PacienteRouter from "./routes/PacienteRouter"
 import MedicoRouter from "./routes/MedicoRoutes"
@@ -44,6 +44,12 @@ import cors from "cors"
 		this.app.use("/", especialidadRoutes)
 		this.app.use("/", citaRouter)
 		this.app.use("/", formularioRouter)
+		this.app.use(
+			(req:Request,res:Response,next:NextFunction)=>{
+				res.status(404).json({message: "Recurso no encontrado"})
+				next()
+			})
+		
 	}
 	/*
 		Metodo que inicia el servidor en el puerto 3000
@@ -56,7 +62,9 @@ import cors from "cors"
 		Metodo que apaga el servidor 
 	*/
 	public close():void{
-		this.server.close()
+		if (this.server) {
+            this.server.close()
+        }
 	}
 }
 export default App

@@ -11,7 +11,7 @@ class pacienteController extends Controller{
    */
     async obtenerPacientes(req:Request, res:Response){
         const pacientes = await this.prismaClient.paciente.findMany()
-        return res.status(200).json({ pacientes })      
+        return res.status(200).json({pacientes})      
         
     }
     /**

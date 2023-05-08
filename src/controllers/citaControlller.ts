@@ -56,7 +56,7 @@ class CitaController extends Controller{
     */
     async obtenerCitas(req:Request, res:Response){
         try{
-            const citas = await this.prismaClient.cita.findMany({
+            const resul = await this.prismaClient.cita.findMany({
                 include: {
                   Paciente:true,
                   Medico:true
@@ -67,7 +67,7 @@ class CitaController extends Controller{
                 Posteriormente se toma citas en un map en donde en modo json crea nombres representativos
                 de lo que se mostrara tomando los datos de las citas uniendo los datos relacionados con las otras tablas
               */
-              const resultado = citas.map((cita) => ({
+              const citas = resul.map((cita) => ({
                 Nombre_Medico: cita.Medico?.nombre,
                 Apellido_Medico: cita.Medico?.apellido,
                 Nombre_Paciente: cita.Paciente?.nombre,
@@ -77,7 +77,7 @@ class CitaController extends Controller{
 
               }))
             
-            res.status(201).json(resultado)
+            res.status(200).json({citas})
         }catch(e){
             console.error(e)
             res.status(500).json({ message: "Error en listar las citas" })

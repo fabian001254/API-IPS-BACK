@@ -10,13 +10,13 @@ class MedicoController extends Controller {
    */
   async obtenerMedicos(req: Request, res: Response) {
     try {
-      const medicos = await this.prismaClient.medico.findMany({
+      const medico = await this.prismaClient.medico.findMany({
         include: {
           Especialidad: true,
         },
       })
 
-      const resultado = medicos.map((medico) => ({
+      const medicos = medico.map((medico) => ({
         tarjetaProfesional: medico.tarjetaProfesional,
         nombre: medico.nombre,
         apellido: medico.apellido,
@@ -25,7 +25,7 @@ class MedicoController extends Controller {
         especialidad: medico.Especialidad?.nombre,
       }))
 
-      res.status(200).json(resultado)
+      res.status(200).json({medicos})
     } catch (e) {
       console.error(e)
       res
