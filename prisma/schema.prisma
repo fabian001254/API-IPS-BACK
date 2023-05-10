@@ -7,8 +7,8 @@ generator jsonSchema {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = "mysql://root:root@localhost:3306/ips"
 }
 
 model Paciente {

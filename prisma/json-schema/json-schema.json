@@ -4,41 +4,53 @@
     "Paciente": {
       "type": "object",
       "properties": {
-        "Cedula": {
+        "cedula": {
           "type": "integer"
         },
-        "Nombre": {
+        "nombre": {
           "type": "string"
         },
-        "Apellido": {
+        "apellido": {
           "type": "string"
         },
-        "Fecha de nacimiento": {
+        "fechaNacimiento": {
           "type": "string",
           "format": "date-time"
         },
-        "Telefono": {
+        "telefono": {
           "type": "string"
+        },
+        "Cita": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cita"
+          }
         }
       }
     },
     "Medico": {
       "type": "object",
       "properties": {
-        "Tarjeta Profesional": {
+        "tarjetaProfesional": {
           "type": "integer"
         },
-        "Nombre": {
+        "nombre": {
           "type": "string"
         },
-        "Apellido": {
+        "apellido": {
           "type": "string"
         },
-        "Consultorio": {
+        "consultorio": {
           "type": "string"
         },
-        "Correo": {
+        "correo": {
           "type": "string"
+        },
+        "Cita": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cita"
+          }
         },
         "Especialidad": {
           "anyOf": [
@@ -55,7 +67,10 @@
     "Cita": {
       "type": "object",
       "properties": {
-        "Fecha": {
+        "idcita": {
+          "type": "integer"
+        },
+        "fecha": {
           "type": "string",
           "format": "date-time"
         },
@@ -84,8 +99,17 @@
     "Especialidad": {
       "type": "object",
       "properties": {
-        "Nombre": {
+        "idEspecialidad": {
+          "type": "integer"
+        },
+        "nombre": {
           "type": "string"
+        },
+        "Medico": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Medico"
+          }
         }
       }
     }
