@@ -59,25 +59,11 @@
           "type": "string",
           "format": "date-time"
         },
-        "Medico": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/Medico"
-            },
-            {
-              "type": "null"
-            }
-          ]
+        "Cedula Paciente": {
+          "type": "integer"
         },
-        "Paciente": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/Paciente"
-            },
-            {
-              "type": "null"
-            }
-          ]
+        "Tarjeta Profesional": {
+          "type": "integer"
         }
       }
     },
