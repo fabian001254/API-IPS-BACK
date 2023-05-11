@@ -1,6 +1,11 @@
 import { Response , Request } from "express"
 import Controller from "./controller"
 
+function contieneNumeros(cadena: string): boolean {
+    const regex = /\d/
+    return regex.test(cadena)
+}
+
 class EspecialidadController extends Controller{
       /**
         * Crea un nuevo registro de especialidad en la base de datos.
@@ -11,9 +16,13 @@ class EspecialidadController extends Controller{
     async crearEspecialidad(req:Request,res:Response){	
         try{            
             const { nombre } = req.body
+
+            if(contieneNumeros(nombre)){
+                return res.status(422).json({ mensaje: "No coinciden los tipos de datos" })
+            }
             // Validación de campos vacíos
             if (!nombre) {
-                return res.status(400).json({ mensaje: "Falta el nombre de la especialidad" })
+                return res.status(422).json({ mensaje: "Falta el nombre de la especialidad" })
             }
 
             // Verificación de si la especialidad ya está registrada
@@ -22,7 +31,7 @@ class EspecialidadController extends Controller{
                 where: { nombre: { equals: nombreM } },
             })
             if(nombreRepeat){
-                return res.status(400).json({ message: "Esta especialidad ya existe"})
+                return res.status(409).json({ message: "Esta especialidad ya existe"})
             }
 
             // Creación del nuevo registro de especialidad en la base de datos

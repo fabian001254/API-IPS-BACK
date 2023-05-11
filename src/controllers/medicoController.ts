@@ -1,6 +1,11 @@
 import { Response, Request } from "express"
 import Controller from "./controller"
 
+function contieneNumeros(cadena: string): boolean {
+  const regex = /\d/
+  return regex.test(cadena)
+}
+
 class MedicoController extends Controller {
   /**
    * Obtiene la lista de todos los médicos registrados, incluyendo su especialidad.
@@ -8,6 +13,8 @@ class MedicoController extends Controller {
    * @param res Response object de express.
    * @returns Un objeto JSON que contiene información de los médicos con su respectiva especialidad.
    */
+
+  
   async obtenerMedicos(req: Request, res: Response) {
     try {
       const medico = await this.prismaClient.medico.findMany({
@@ -46,7 +53,11 @@ class MedicoController extends Controller {
 
       // Validación de campos vacíos
       if (Object.values({ tarjetaProfesional, nombre, apellido, consultorio, correo, especialidad }).some((value) => !value)) {
-        return res.status(400).json({ message: "Debe completar todos los campos" })
+        return res.status(422).json({ message: "Debe completar todos los campos" })
+      }
+
+      if(contieneNumeros(nombre) || contieneNumeros(apellido)){
+        return res.status(422).json({ mensaje: "No coinciden los tipos de datos" })
       }
 
       // Verificación de si la tarjeta profesional ya está registrada
@@ -54,7 +65,7 @@ class MedicoController extends Controller {
         where: { tarjetaProfesional: { equals: tarjetaProfesional } },
       })
       if (tarjetaRepeat) {
-        return res.status(400).json({ message: "Esta tarjeta profesional ya existe" })
+        return res.status(409).json({ message: "Esta tarjeta profesional ya existe" })
       }
 
       // Búsqueda de la especialidad del médico

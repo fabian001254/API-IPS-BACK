@@ -1,6 +1,11 @@
 import { Response , Request } from "express"
 import Controller from "./controller"
 
+function contieneNumeros(cadena: string): boolean {
+  const regex = /\d/
+  return regex.test(cadena)
+}
+
 class pacienteController extends Controller{
 
   /**
@@ -26,7 +31,11 @@ class pacienteController extends Controller{
           
           // Validación de campos vacíos
           if (Object.values({ cedula, nombre, apellido, fechaNacimiento, telefono }).some(value => !value)) {
-            return res.status(400).json({ message: "Debe completar todos los campos" })
+            return res.status(422).json({ message: "Debe completar todos los campos" })
+          }
+
+          if(contieneNumeros(nombre) || contieneNumeros(apellido)) {
+            return res.status(422).json({ mensaje: "No coinciden los tipos de datos" })
           }
         
           // Verificación de si la cedula ya está registrada
@@ -34,7 +43,7 @@ class pacienteController extends Controller{
             where: { cedula: { equals: cedula } },
           })
           if(cedulaRepeat){
-            return res.status(400).json({ message: "Este numero de cedula ya existe!" })
+            return res.status(409).json({ message: "Este numero de cedula ya existe!" })
           }
 
           // Convierte la fecha de nacimiento en formato de cadena (AAAA-MM-DD) a un objeto Date de JavaScript

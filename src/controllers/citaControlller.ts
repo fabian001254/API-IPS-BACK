@@ -11,11 +11,14 @@ class CitaController extends Controller{
     async crearCita(req:Request, res: Response){
         try{
 
-           const {fecha,pacienteCedula,tarjetaProfesional} = req.body
-
+           const {fecha,pacienteCedula,tarjetaProfesional} = req.body           
             // Validación de campos vacíos
            if (Object.values({ fecha,pacienteCedula,tarjetaProfesional }).some(value => !value)) {
-            return res.status(400).json({ message: "Debe completar todos los campos" })
+            return res.status(422).json({ message: "Debe completar todos los campos" })
+            }
+
+            if(typeof pacienteCedula == "string" || typeof tarjetaProfesional == "string") {
+                return res.status(422).json({ mensaje: "No coinciden los tipos de datos" })
             }
 
             // Validación de existencia de la cedula del paciente y de la tarjeta profesional del medico
@@ -68,6 +71,7 @@ class CitaController extends Controller{
                 de lo que se mostrara tomando los datos de las citas uniendo los datos relacionados con las otras tablas
               */
               const citas = resul.map((cita) => ({
+                Id_Cita: cita.idcita,
                 Nombre_Medico: cita.Medico?.nombre,
                 Apellido_Medico: cita.Medico?.apellido,
                 Nombre_Paciente: cita.Paciente?.nombre,
